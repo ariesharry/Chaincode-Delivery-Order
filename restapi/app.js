@@ -3,8 +3,9 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const createRequestDO = require('./api/routes/createRequestDO');
-const queryRequestDO  = require('./api/routes/queryRequestDO');
+const invoke = require('./api/routes/invoke');
+const query = require('./api/routes/query');
+const queryAll = require('./api/routes/queryAll');
 const { application } = require('express');
 
 app.use(morgan('dev'));
@@ -24,9 +25,9 @@ app.use((req, res, next) => {
     next();
 });
 
-
-app.use('/createRequestDO', createRequestDO);
-app.use('/queryRequestDO', queryRequestDO);
+app.use('/invoke', invoke);
+app.use('/query', query);
+app.use('/queryAll', queryAll);
 
 
 app.use((req, res, next) => {
