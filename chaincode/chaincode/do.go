@@ -1,7 +1,7 @@
 package chaincode
 
 import (
-	"github.com/hyperledger/fabric-contract-api-go/contractapi"
+	"github.com/hyperledger/fabric-contract-api-go"
 )
 
 // RequestDetails represents the structure of the delivery order request details
