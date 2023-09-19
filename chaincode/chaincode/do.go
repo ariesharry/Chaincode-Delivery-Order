@@ -58,7 +58,9 @@ type Party struct {
 }
 
 type CargoDetails struct {
-	container Container `json:"container"`
+	isContainer  bool         `json:"isContainer"`
+	container    Container    `json:"container"`
+	nonContainer NonContainer `json:"nonContainer"`
 }
 
 type Container struct {
@@ -68,6 +70,24 @@ type Container struct {
 	sizeType     SizeType    `json:"sizeType"`
 	grossWeight  GrossWeight `json:"grossWeight"`
 	ownership    string      `json:"ownership"`
+}
+
+type NonContainer struct {
+	nonContainerSeq   int64             `json:"nonContainerSeq"`
+	goodsDescription  string            `json:"goodsDescription"`
+	packageQuantity   PackageQuantity   `json:"packageQuantity"`
+	grossWeight       GrossWeight       `json:"grossWeight"`
+	measurementVolume MeasurementVolume `json:"measurementVolume"`
+}
+
+type PackageQuantity struct {
+	amount float64 `json:"amount"`
+	unit   string  `json:"unit"`
+}
+
+type MeasurementVolume struct {
+	amount float64 `json:"amount"`
+	unit   string  `json:"unit"`
 }
 
 type SizeType struct {
