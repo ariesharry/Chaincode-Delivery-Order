@@ -37,5 +37,3 @@ func (doc *DeliveryOrderContract) QueryAllRequestDetails(ctx contractapi.Transac
 
 	return requestDetailsList, nil
 }
-
-

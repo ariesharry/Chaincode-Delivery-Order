@@ -1,104 +1,117 @@
 package chaincode
 
 import (
-	"github.com/hyperledger/fabric-contract-api-go"
+	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
 
 // RequestDetails represents the structure of the delivery order request details
 type RequestDetails struct {
-	ID				string 		`json:"id"`
-	Requestor     Requestor     `json:"requestor"`
-	ShippingLine  ShippingLine  `json:"shippingLine"`
-	Payment       Payment       `json:"payment"`
-	Document      Document      `json:"document"`
-	Parties       Parties       `json:"parties"`
-	CargoDetails  CargoDetails  `json:"cargoDetails"`
-	Location      Location      `json:"location"`
-	PaymentDetail PaymentDetail `json:"paymentDetail"`
-	SupportingDoc SupportingDoc `json:"supportingDocument"`
-	Status        string 		`json:"status"`
+	id            string        `json:"id"` // nomor request do
+	requestor     Requestor     `json:"requestor"`
+	shippingLine  ShippingLine  `json:"shippingLine"`
+	payment       Payment       `json:"payment"`
+	document      Document      `json:"document"`
+	parties       Parties       `json:"parties"`
+	cargoDetails  CargoDetails  `json:"cargoDetails"`
+	location      Location      `json:"location"`
+	paymentDetail PaymentDetail `json:"paymentDetail"`
+	supportingDoc SupportingDoc `json:"supportingDocument"`
+	status        string        `json:"status"`
 }
 
 type Requestor struct {
-	RequestorType string `json:"requestorType"`
-	URLFile       string `json:"urlFile"`
-	NPWP          string `json:"npwp"`
-	NIB           string `json:"nib"`
-	RequestorName string `json:"requestorName"`
-	RequestorAddr string `json:"requestorAddress"`
+	requestorType    string `json:"requestorType"`
+	urlFile          string `json:"urlFile"`
+	npwp             string `json:"npwp"`
+	nib              string `json:"nib"`
+	requestorName    string `json:"requestorName"`
+	requestorAddress string `json:"requestorAddress"`
 }
 
 type ShippingLine struct {
-	ShippingType string `json:"shippingType"`
-	DOExpired    string `json:"doExpired"`
-	VesselName   string `json:"vesselName"`
-	VoyageNumber string `json:"voyageNumber"`
-	Payment      string `json:"payment"`
+	shippingType string `json:"shippingType"`
+	doExpired    string `json:"doExpired"`
+	vesselName   string `json:"vesselName"`
+	voyageNumber string `json:"voyageNumber"`
 }
 
 type Payment struct {
-	TermOfPayment string `json:"termOfPayment"`
+	termOfPayment string `json:"termOfPayment"`
 }
 
 type Document struct {
-	LadingBillNumber string `json:"ladingBillNumber"`
-	LadingBillDate   string `json:"ladingBillDate"`
-	LadingBillType   string `json:"ladingBillType"`
-	URLFile          string `json:"urlFile"`
+	ladingBillNumber string `json:"ladingBillNumber"`
+	ladingBillDate   string `json:"ladingBillDate"`
+	ladingBillType   string `json:"ladingBillType"`
+	urlFile          string `json:"urlFile"`
 }
 
 type Parties struct {
-	Shipper     Party `json:"shipper"`
-	Consignee   Party `json:"consignee"`
-	NotifyParty Party `json:"notifyParty"`
+	shipper     Party `json:"shipper"`
+	consignee   Party `json:"consignee"`
+	notifyParty Party `json:"notifyParty"`
 }
 
 type Party struct {
-	Name string `json:"name"`
-	NPWP string `json:"npwp"`
+	name string `json:"name"`
+	npwp string `json:"npwp"`
 }
 
 type CargoDetails struct {
-	Container Container `json:"container"`
+	container Container `json:"container"`
 }
 
 type Container struct {
-	ContainerSeq   string `json:"containerSeq"`
-	ContainerNo    string `json:"containerNo"`
-	SealNo         string `json:"sealNo"`
-	SizeType       string `json:"sizeType"`
-	GrossWeight    string `json:"grossWeight"`
-	Ownership      string `json:"ownership"`
+	containerSeq int64       `json:"containerSeq"`
+	containerNo  string      `json:"containerNo"`
+	sealNo       string      `json:"sealNo"`
+	sizeType     SizeType    `json:"sizeType"`
+	grossWeight  GrossWeight `json:"grossWeight"`
+	ownership    string      `json:"ownership"`
+}
+
+type SizeType struct {
+	size int64  `json:"size"`
+	tipe string `json:"type"`
+}
+
+type GrossWeight struct {
+	amount float64 `json:"amount"`
+	unit   string  `json:"unit"`
 }
 
 type Location struct {
-	LocationType string `json:"locationType"`
-	Location     string `json:"location"`
-	CountryCode  string `json:"countryCode"`
-	PortCode     string `json:"portCode"`
+	locationType LocationType `json:"locationType"`
+}
+
+type LocationType struct {
+	location    string `json:"location"`
+	countryCode string `json:"countryCode"`
+	portCode    string `json:"portCode"`
 }
 
 type PaymentDetail struct {
-	Invoice Invoice `json:"invoice"`
+	invoice Invoice `json:"invoice"`
 }
 
 type Invoice struct {
-	InvoiceNo    string `json:"invoiceNo"`
-	InvoiceDate  string `json:"invoiceDate"`
-	TotalAmount  string `json:"totalAmount"`
-	BankID       string `json:"bankId"`
-	AccountNo    string `json:"accountNo"`
-	URLFile      string `json:"urlFile"`
+	invoiceNo   string  `json:"invoiceNo"`
+	invoiceDate string  `json:"invoiceDate"`
+	totalAmount float64 `json:"totalAmount"`
+	bankID      string  `json:"bankId"`
+	accountNo   string  `json:"accountNo"`
+	urlFile     string  `json:"urlFile"`
 }
 
 type SupportingDoc struct {
-	DocumentType DocumentType `json:"documentType"`
+	documentType DocumentType `json:"documentType"`
 }
 
 type DocumentType struct {
-	DocumentNo   string `json:"documentNo"`
-	DocumentDate string `json:"documentDate"`
-	URLFile      string `json:"urlFile"`
+	typeDocument string `json:"document"`
+	documentNo   string `json:"documentNo"`
+	documentDate string `json:"documentDate"`
+	urlFile      string `json:"urlFile"`
 }
 
 type DeliveryOrderContract struct {
